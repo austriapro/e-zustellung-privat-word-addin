@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" elementFormDefault="qualified" attributeFormDefault="unqualified" id="ed_remote_control_20150115">
+	<!-- xs:import namespace="http://www.e-zustellung.at/namespaces/ed_delivery_20150115" schemaLocation="ed_delivery_20150115.xsd"/ -->
+	<xs:include schemaLocation="ed_base_20150115.xsd" id="ed_base_20150115"/>
+	<xs:include schemaLocation="ed_delivery_20150115.xsd" id="ed_delivery_20150115"/>
+	<!-- xs:import namespace="http://www.e-zustellung.at/namespaces/ed_base_20150115" schemaLocation="ed_base_20150115.xsd"/ -->
+	<xs:element name="GetReceivedDeliveries" type="RequestType"/>
+	<xs:element name="GetReceivedDeliveriesFrom" type="FromRequestType"/>
+	<xs:element name="GetReceivedDeliveryDetails" type="DeliveryIdRequestType"/>
+	<xs:element name="GetReceivedDeliveryAttachments" type="DeliveryIdRequestType"/>
+	<xs:element name="GetReceivedDeliveryAttachment" type="DeliveryAttachmentIdRequestType"/>
+	<xs:element name="MoveReceivedDeliveryToTrash" type="DeliveryIdRequestType"/>
+	<xs:element name="GetReceivedDeliveriesInTrash" type="RequestType"/>
+	<xs:element name="RestoreReceivedDeliveryFromTrash" type="DeliveryIdRequestType"/>
+	<xs:element name="DeleteReceivedDeliveryFromTrash" type="DeliveryIdRequestType"/>
+	<xs:element name="GetAddressBook" type="RequestType"/>
+	<xs:element name="DeleteAddressBookEntry" type="DeleteAddresBookEntryType"/>
+	<xs:element name="SearchAddress" type="searchAddress"/>
+	<xs:element name="SendDelivery" type="SendDeliveryRequestType"/>
+	<xs:element name="GetSentDeliveries" type="RequestType"/>
+	<xs:element name="GetSentDeliveriesFrom" type="FromRequestType"/>
+	<xs:element name="GetSentDeliveryAttachments" type="DeliveryIdRequestType"/>
+	<xs:element name="DeleteSentDelivery" type="DeliveryIdRequestType"/>
+	<xs:element name="GetAbsence"/>
+	<xs:element name="SetAbsence"/>
+	<xs:element name="RemoveAbsence"/>
+	<xs:element name="GetAcceptedDocumentFormats"/>
+	<xs:element name="SetAcceptedDocumentFormats"/>
+	<xs:element name="GetAcceptedDocumentClasses"/>
+	<xs:element name="SetAcceptedDocumentClasses"/>
+	<xs:element name="GetAcceptedDeliveryQualities"/>
+	<xs:element name="SetAcceptedDeliveryQualities"/>
+	<xs:element name="Deliveries" type="DeliveriesType"/>
+	<xs:element name="DeliveryDetails" type="DeliveryDetailsType"/>
+	<xs:element name="DeliveryAttachments" type="DocumentsType"/>
+	<xs:element name="DeliveryAttachment" type="DocumentType"/>
+	<xs:element name="SentDelivery" type="SentDeliveryType"/>
+	<xs:element name="AddressBook" type="AddressBookType"/>
+	<xs:element name="Absence"/>
+	<xs:element name="DocumentFormats"/>
+	<xs:element name="DocumentClasses"/>
+	<xs:element name="DeliveryQualities"/>
+	<xs:element name="RemoteControlFault" type="FaultType"/>
+	<xs:complexType name="RequestType">
+		<xs:sequence>
+			<xs:element name="Edid" type="edIDType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryIdRequestType">
+		<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:sequence>
+					<xs:element name="DeliveryId" type="DeliveryIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeliveryAttachmentIdRequestType">
+		<xs:complexContent>
+			<xs:extension base="DeliveryIdRequestType">
+				<xs:sequence>
+					<xs:element name="AttachmentId" type="AttachmentIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FromRequestType">
+		<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:choice>
+					<xs:element name="DateTime" type="xs:dateTime"/>
+					<xs:element name="DeliveryId" type="DeliveryIdType"/>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeleteAddresBookEntryType">
+		<xs:sequence>
+			<xs:element name="OwnerEdid" type="edIDType"/>
+			<xs:element name="ToDeleteEdid" type="edIDType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SendDeliveryRequestType">
+		<xs:sequence>
+			<xs:element name="Sender">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="SenderReceiverType">
+							<xs:sequence>
+								<xs:element name="NotificationAddress" type="NotificationAddressType" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RecipientEdid" type="edIDType"/>
+			<xs:element name="Subject" type="subjectType"/>
+			<xs:element name="MetaData" type="MetaDataType"/>
+			<xs:element name="Documents" type="DocumentsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryType">
+		<xs:sequence>
+			<xs:element name="Sender" type="SenderReceiverType"/>
+			<xs:element name="Recipient" type="SenderReceiverType"/>
+			<xs:element name="Date" type="xs:date"/>
+			<xs:element name="Subject" type="subjectType"/>
+			<xs:element name="DeliveryQuality" type="deliveryTypeType"/>
+			<xs:element name="DocumentClass" type="documentClassType"/>
+			<xs:element name="IsRead" type="xs:boolean"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="DeliveryIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DeliveriesType">
+		<xs:sequence>
+			<xs:element name="Delivery" type="DeliveryType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryDetailsType">
+		<xs:sequence>
+			<xs:element name="MetaData" type="MetaDataType"/>
+			<xs:element name="Documents" type="DocumentsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--	<xs:complexType name="AttachmentMetaDataType">
+		<xs:sequence>
+			<xs:element name="FileName" type="string255"/>
+			<xs:element name="FileSize" type="xs:positiveInteger"/>
+			<xs:element name="MimeType" type="token255"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="AttachmentIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="AttachmentsMetaDataType">
+		<xs:sequence>
+			<xs:element name="Attachment" type="AttachmentMetaDataType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryAttachmentType">
+		<xs:sequence>
+			<xs:element name="FileName" type="string255"/>
+			<xs:element name="Base64Content" type="xs:base64Binary"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="AttachmentIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="AttachmentType">
+		<xs:sequence>
+			<xs:element name="Base64Content" type="xs:base64Binary"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="AttachmentIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DeliveryAttachmentsType">
+		<xs:sequence>
+			<xs:element name="Attachment" type="DeliveryAttachmentType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttachmentsType">
+		<xs:sequence>
+			<xs:element name="Attachment" type="AttachmentType" maxOccurs="unbounded"/>
+		</xs:sequence>  
+	</xs:complexType>  -->
+	<xs:complexType name="SentDeliveryType">
+		<xs:sequence>
+			<xs:element name="SendingApplicationId" type="appIDType"/>
+			<xs:element name="DeliveryId" type="DeliveryIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressBookType">
+		<xs:sequence>
+			<xs:element name="Entry" type="PersonDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--	<xs:complexType name="AddressBookEntryType">
+		<xs:sequence>
+			<xs:element name="Edid" type="edIDType"/>
+			<xs:element name="PersonType" type="PersonTypeType"/>
+			<xs:element name="GivenName" type="xs:token"/>
+			<xs:element name="Surname" type="xs:token"/>
+			<xs:element name="CommonName" type="xs:token"/>
+			<xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+			<xs:element name="EMailAddress" type="xs:token"/>
+			<xs:element name="Street" type="xs:token"/>
+			<xs:element name="Zip" type="xs:token"/>
+			<xs:element name="City" type="xs:token"/>
+			<xs:element name="CountryCode" type="CountryCodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PersonTypeType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="NATURAL_PERSON"/>
+			<xs:enumeration value="JURISTIC_PERSON"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CountryCodeType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType> -->
+	<xs:complexType name="FaultType">
+		<xs:sequence>
+			<xs:element name="Reason" type="FaultReasonType"/>
+			<xs:element name="Message" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="FaultReasonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUTHENTICATION_FAILURE"/>
+			<xs:enumeration value="ILLEGAL_STATE"/>
+			<xs:enumeration value="INVALID_DELIVERY_ID"/>
+			<xs:enumeration value="INVALID_ATTACHMENT_ID"/>
+			<xs:enumeration value="INVALID_DATE_TIME"/>
+			<xs:enumeration value="INTERNAL_ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeliveryIdType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AttachmentIdType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="searchAddress">
+		<xs:sequence>
+			<xs:element name="OwnerEdid" type="edIDType"/>
+			<xs:element name="Entry" type="PersonDataType"/>
+		</xs:sequence>
+		<xs:attribute name="addToAddressbook" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:element name="noResponse" type="xs:string"/>
+</xs:schema>

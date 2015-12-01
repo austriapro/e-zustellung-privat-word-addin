@@ -1,0 +1,1 @@
+svcutil /out:ZustellContractSvc.cs remote-control_20150115.wsdl ed_base_20150115.xsd ed_delivery_20150115.xsd ed_remote_control_20150115.xsd W3C-XMLDSig.xsd

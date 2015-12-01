@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns1:OpenSourceList xmlns:ns1="http://tempuri.org/OpenSourceComponents.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ns1:Component>
+		<ns1:Name>component1</ns1:Name>
+	</ns1:Component>
+	<ns1:Component>
+		<ns1:Name>component1</ns1:Name>
+	</ns1:Component>
+	<ns1:Component>
+		<ns1:Name>component1</ns1:Name>
+	</ns1:Component>
+</ns1:OpenSourceList>

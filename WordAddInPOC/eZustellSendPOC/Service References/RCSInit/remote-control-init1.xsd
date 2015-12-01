@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.e-zustellung.at/namespaces/ed_remote_control_init_20150115" xmlns:ns1="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" targetNamespace="http://www.e-zustellung.at/namespaces/ed_remote_control_init_20150115" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://labs1.austriapro.at:443/ZustellserviceWko/services/2015/remote-control-init?xsd=1" namespace="http://www.w3.org/2000/09/xmldsig#" />
+  <xs:element name="RemoteControlInitFault" type="tns:FaultType" />
+  <xs:element name="processAuthenticationCSR" type="xs:base64Binary" />
+  <xs:element name="processAuthenticationCSRRequest" type="tns:processAuthenticationCSRType" />
+  <xs:element name="processAuthenticationCSRResponse" type="xs:base64Binary" />
+  <xs:complexType name="processAuthenticationCSRType">
+    <xs:sequence>
+      <xs:element ref="ns1:Signature" />
+      <xs:element minOccurs="0" name="MandateEdid" type="xs:string" />
+      <xs:element name="validForYears" type="xs:duration" />
+      <xs:element name="pkcs10CSR" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaultType">
+    <xs:sequence>
+      <xs:element name="Reason" type="tns:FaultReasonType" />
+      <xs:element minOccurs="0" name="Message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FaultReasonType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AUTHENTICATION_FAILURE" />
+      <xs:enumeration value="ILLEGAL_STATE" />
+      <xs:enumeration value="INVALID_SIGNATURE" />
+      <xs:enumeration value="INVALID_XML_REQUEST" />
+      <xs:enumeration value="INVALID_CSR" />
+      <xs:enumeration value="INTERNAL_ERROR" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

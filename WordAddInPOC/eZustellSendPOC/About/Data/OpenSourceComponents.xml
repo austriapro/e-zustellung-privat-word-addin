@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSourceList>
+  <Component>
+    <Name>Bouncy Castle (Csharp)</Name>
+    <License>MIT License</License>
+    <Link>https://www.bouncycastle.org/licence.html</Link>
+  </Component>
+  <Component>
+    <Name>Microsoft Enterprise Library</Name>
+    <License>MS-PL</License>
+    <Link>http://opensource.org/licenses/ms-pl</Link>
+  </Component>
+  <Component>
+    <Name>Microsoft Unity IOC</Name>
+    <License>Apache License V2.0</License>
+    <Link>http://opensource.org/licenses/Apache-2.0</Link>
+  </Component>
+  <Component>
+    <Name>Serilog</Name>
+    <License>Apache License V2.0</License>
+    <Link>http://www.apache.org/licenses/LICENSE-2.0</Link>
+  </Component>
+  <Component>
+    <Name>Multicolumn Combobox</Name>
+    <License>BSD License</License>
+    <Link>http://opensource.org/licenses/bsd-license.php</Link>
+  </Component>
+  <Component>
+    <Name>MVVM in Windows Forms</Name>
+    <License>Demo Sample</License>
+    <Link>https://bitbucket.org/lbras/mvvmforms</Link>
+  </Component>
+  <Component>
+    <Name>Bindable list view</Name>
+    <License>Provided as Open Source w/o warrenty</License>
+    <Link>https://www.interact-sw.co.uk/utilities/bindablelistview/source/</Link>
+  </Component>
+</OpenSourceList>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<csr:processAuthenticationCSRRequest xmlns:csr="http://www.e-zustellung.at/namespaces/ed_remote_control_init_20150115"
+                                     xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
+                                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                     >
+  <!--<dsig:Signature></dsig:Signature>-->
+  <csr:MandateEdid></csr:MandateEdid>
+  <csr:validForYears>P1Y</csr:validForYears>
+  <csr:pkcs10CSR></csr:pkcs10CSR>
+</csr:processAuthenticationCSRRequest>

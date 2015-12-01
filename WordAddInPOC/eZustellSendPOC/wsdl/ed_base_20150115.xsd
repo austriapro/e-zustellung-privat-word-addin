@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" elementFormDefault="qualified" attributeFormDefault="unqualified" id="ed_base_20150115">
+	<xs:element name="AbstractPersonData" type="AbstractPersonType">
+		<xs:annotation>
+			<xs:documentation>dummy abstract Peson Data element needed for bi-lingual schema (substitution groups)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PersonData" type="PersonDataType">
+		<xs:annotation>
+			<xs:documentation>element of signed person datastructure type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<!-- ### base type for person data ### -->
+	<xs:element name="Person" type="AbstractPersonType"/>
+	<!--	<xs:element name="Data" type="DataType"/>   -->
+	<!-- ### physical person and corporate body ### -->
+	<xs:element name="edNatPerson" type="edNatPersonType" substitutionGroup="Person">
+		<xs:annotation>
+			<xs:documentation>element of physical person type, dreived from Person (abstract)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="edJurPerson" type="edJurPersonType" substitutionGroup="Person">
+		<xs:annotation>
+			<xs:documentation>element of corporate body type, derived from Person</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Name" type="PersonNameType">
+		<xs:annotation>
+			<xs:documentation>data related to the person's name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateOfBirth" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>date of birth, compare Geburtsdatum</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Address" type="AbstractAddressType"/>
+	<xs:element name="PostalAddress" type="PostalAddressType" substitutionGroup="Address">
+		<xs:annotation>
+			<xs:documentation>Postal or ZMR Address, compare PostAdresse</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InternetAddress" type="InternetAddressType" substitutionGroup="Address">
+		<xs:annotation>
+			<xs:documentation>element of internet address type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TelephoneAddress" type="TelephoneAddressType" substitutionGroup="Address">
+		<xs:annotation>
+			<xs:documentation>element of TelephoneAddressType, compare TelefonAdresse</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FormattedNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Complete Number ready formated, comapre FormatierteNummer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="InternetAddressType">
+		<xs:annotation>
+			<xs:documentation>internet based communication</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractAddressType">
+				<xs:sequence minOccurs="0" maxOccurs="1">
+					<xs:element name="Type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Type of internetadress</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Address" type="xs:anyURI">
+						<xs:annotation>
+							<xs:documentation>URI: email-Address, Web, FTP, LDAP, ..., comapre Adress früher: Email</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TelephoneAddressType">
+		<xs:annotation>
+			<xs:documentation>phone numbers</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractAddressType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="Type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Type of internetadress</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Number" type="TelcomNumberType">
+						<xs:annotation>
+							<xs:documentation>phonenumber</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TelcomNumberType">
+		<xs:choice>
+			<xs:element ref="FormattedNumber"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="IDType">
+		<xs:sequence>
+			<xs:element name="Type">
+				<xs:annotation>
+					<xs:documentation>Typ:
+* gvZbPK
+* wZbPK
+* edID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AbstractPersonType">
+		<xs:annotation>
+			<xs:documentation>main structure of person data</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0">
+			<xs:element name="Identification" type="IDType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>ERV code, bPK, ZbPK, vZbPK goes here</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ParameterType">
+		<xs:annotation>
+			<xs:documentation>is useed for the diffent parameter types</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="edAcceptedFormats" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="edAcceptedFormat" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="edAcceptedClasses" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="edAcceptedClasse" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="edAcceptedTypes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="edAcceptedType" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="edSupportedIDTypes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="edSupportedIDType" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonDataType">
+		<xs:annotation>
+			<xs:documentation>signed person datastructure. The first Identification elements (from the base type) denote the record as such (e.g. database key for this record) - not to be mistaken for identifiers of the person or of an address (they have their own Identification elements).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Person"/>
+			<xs:element ref="Address" minOccurs="0" maxOccurs="unbounded"/>
+			<!--xs:element ref="Data" minOccurs="0"/-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AbstractAddressType">
+		<xs:annotation>
+			<xs:documentation>main structure of address data</xs:documentation>
+		</xs:annotation>
+		<xs:anyAttribute namespace="##other"/>
+	</xs:complexType>
+	<xs:complexType name="PostalAddressType">
+		<xs:complexContent>
+			<xs:extension base="AbstractAddressType">
+				<xs:sequence>
+					<xs:element name="Type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Type of postal adress</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CountryCode" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Code for the country, use ISO or internatinal Postalstandard, compare Staatscode früher: c</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:pattern value="[A-Z]{2}"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="PostalCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>ZIP, compare Postleitzahl früher: postalCode</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="City" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>compare Gemeinde früher: l</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="StreetName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Straßenname  früher: street</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="edNatPersonType">
+		<xs:annotation>
+			<xs:documentation>physical person</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractPersonType">
+				<xs:sequence minOccurs="0">
+					<xs:element ref="Name"/>
+					<xs:element ref="DateOfBirth" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PersonNameType">
+		<xs:sequence>
+			<xs:element name="GivenName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Vorname früher: givenName</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilyName">
+				<xs:annotation>
+					<xs:documentation>Nachname früher: sn</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string"/>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edJurPersonType">
+		<xs:annotation>
+			<xs:documentation>juridical person, organisation</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractPersonType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="FullName" type="xs:normalizedString">
+						<xs:annotation>
+							<xs:documentation>name of corporate body (whole name), compare VollerName früher: cn</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Organization" type="xs:token" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>part of an organisation, see also X.500 ou (eg departement, section, branch, ...) , compare Organisation user for sub post office boxies</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MailBox" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>List of Postboxes</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentsType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="Document" type="DocumentType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentType">
+		<xs:sequence>
+			<xs:element name="FileName" type="string255"/>
+			<xs:element name="Base64Content" type="xs:base64Binary" minOccurs="0"/>
+			<xs:element name="Size" type="xs:positiveInteger" minOccurs="0"/>
+			<xs:element name="MIMEType" type="token255" minOccurs="0"/>
+			<xs:element name="CheckSum">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AlgorithmID" type="token255"/>
+						<xs:element name="Value" type="token255"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="DocumentIdType" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ErrorsType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="Error" type="ErrorType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:positiveInteger"/>
+			<xs:element name="Text" type="string255"/>
+			<xs:element name="Severity" type="xs:string" minOccurs="0"/>
+			<xs:element name="Exception" type="xs:string" minOccurs="0"/>
+			<xs:element name="Reason" type="ReasonType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DocumentIdType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReasonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUTHENTICATION_FAILURE"/>
+			<xs:enumeration value="ILLEGAL_STATE"/>
+			<xs:enumeration value="INVALID_DELIVERY_ID"/>
+			<xs:enumeration value="INVALID_ATTACHMENT_ID"/>
+			<xs:enumeration value="INVALID_DATE_TIME"/>
+			<xs:enumeration value="INTERNAL_ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string255">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="token255">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

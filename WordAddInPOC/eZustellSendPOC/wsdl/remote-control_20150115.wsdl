@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rc="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" targetNamespace="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import namespace="http://www.e-zustellung.at/namespaces/ed_remote_control_20150115" schemaLocation="ed_remote_control_20150115.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="RemoteControlFault">
+		<wsdl:part name="fault" element="rc:RemoteControlFault"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesResponse">
+		<wsdl:part name="WSResponse" element="rc:Deliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesFromRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveriesFrom"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesFromResponse">
+		<wsdl:part name="WSResponse" element="rc:Deliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryDetailsRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveryDetails"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryDetailsResponse">
+		<wsdl:part name="WSResponse" element="rc:DeliveryDetails"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryAttachmentsRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveryAttachments"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryAttachmentsResponse">
+		<wsdl:part name="WSResponse" element="rc:DeliveryAttachments"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryAttachmentRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveryAttachment"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveryAttachmentResponse">
+		<wsdl:part name="WSResponse" element="rc:DeliveryAttachment"/>
+	</wsdl:message>
+	<wsdl:message name="MoveReceivedDeliveryToTrashRequest">
+		<wsdl:part name="WSRequest" element="rc:MoveReceivedDeliveryToTrash"/>
+	</wsdl:message>
+	<wsdl:message name="MoveReceivedDeliveryToTrashResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesInTrashRequest">
+		<wsdl:part name="WSRequest" element="rc:GetReceivedDeliveriesInTrash"/>
+	</wsdl:message>
+	<wsdl:message name="GetReceivedDeliveriesInTrashResponse">
+		<wsdl:part name="WSResponse" element="rc:Deliveries"/>
+	</wsdl:message>
+	<wsdl:message name="RestoreReceivedDeliveryFromTrashRequest">
+		<wsdl:part name="WSRequest" element="rc:RestoreReceivedDeliveryFromTrash"/>
+	</wsdl:message>
+	<wsdl:message name="RestoreReceivedDeliveryFromTrashResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteReceivedDeliveryFromTrashRequest">
+		<wsdl:part name="WSRequest" element="rc:DeleteReceivedDeliveryFromTrash"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteReceivedDeliveryFromTrashResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetAddressBookRequest">
+		<wsdl:part name="WSRequest" element="rc:GetAddressBook"/>
+	</wsdl:message>
+	<wsdl:message name="GetAddressBookResponse">
+		<wsdl:part name="WSResponse" element="rc:AddressBook"/>
+	</wsdl:message>
+	<wsdl:message name="SendDeliveryRequest">
+		<wsdl:part name="WSRequest" element="rc:SendDelivery"/>
+	</wsdl:message>
+	<wsdl:message name="SendDeliveryResponse">
+		<wsdl:part name="WSResponse" element="rc:SentDelivery"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveriesRequest">
+		<wsdl:part name="WSRequest" element="rc:GetSentDeliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveriesResponse">
+		<wsdl:part name="WSResponse" element="rc:Deliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveriesFromRequest">
+		<wsdl:part name="WSRequest" element="rc:GetSentDeliveriesFrom"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveriesFromResponse">
+		<wsdl:part name="WSResponse" element="rc:Deliveries"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveryAttachmentsRequest">
+		<wsdl:part name="WSRequest" element="rc:GetSentDeliveryAttachments"/>
+	</wsdl:message>
+	<wsdl:message name="GetSentDeliveryAttachmentsResponse">
+		<wsdl:part name="WSResponse" element="rc:DeliveryAttachments"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSentDeliveryRequest">
+		<wsdl:part name="WSRequest" element="rc:DeleteSentDelivery"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSentDeliveryResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetAbsenceRequest">
+		<wsdl:part name="WSRequest" element="rc:GetAbsence"/>
+	</wsdl:message>
+	<wsdl:message name="GetAbsenceResponse">
+		<wsdl:part name="WSResponse" element="rc:Absence"/>
+	</wsdl:message>
+	<wsdl:message name="SetAbsenceRequest">
+		<wsdl:part name="WSRequest" element="rc:SetAbsence"/>
+	</wsdl:message>
+	<wsdl:message name="SetAbsenceResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RemoveAbsenceRequest">
+		<wsdl:part name="WSRequest" element="rc:RemoveAbsence"/>
+	</wsdl:message>
+	<wsdl:message name="RemoveAbsenceResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDocumentFormatsRequest">
+		<wsdl:part name="WSRequest" element="rc:GetAcceptedDocumentFormats"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDocumentFormatsResponse">
+		<wsdl:part name="WSResponse" element="rc:DocumentFormats"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDocumentFormatsRequest">
+		<wsdl:part name="WSRequest" element="rc:SetAcceptedDocumentFormats"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDocumentFormatsResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDocumentClassesRequest">
+		<wsdl:part name="WSRequest" element="rc:GetAcceptedDocumentClasses"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDocumentClassesResponse">
+		<wsdl:part name="WSResponse" element="rc:DocumentClasses"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDocumentClassesRequest">
+		<wsdl:part name="WSRequest" element="rc:SetAcceptedDocumentClasses"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDocumentClassesResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDeliveryQualitiesRequest">
+		<wsdl:part name="WSRequest" element="rc:GetAcceptedDeliveryQualities"/>
+	</wsdl:message>
+	<wsdl:message name="GetAcceptedDeliveryQualitiesResponse">
+		<wsdl:part name="WSResponse" element="rc:DeliveryQualities"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDeliveryQualitiesRequest">
+		<wsdl:part name="WSRequest" element="rc:SetAcceptedDeliveryQualities"/>
+	</wsdl:message>
+	<wsdl:message name="SetAcceptedDeliveryQualitiesResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteAddressBookEntryRequest">
+		<wsdl:part name="WSRequest" element="rc:DeleteAddressBookEntry"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteAddressBookEntryResponse">
+		<wsdl:part name="WSResponse" element="rc:noResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SearchAddressRequest">
+		<wsdl:part name="WSRequest" element="rc:SearchAddress"/>
+	</wsdl:message>
+	<wsdl:message name="SearchAddressResponse">
+		<wsdl:part name="WSResponse" element="rc:AddressBook"/>
+	</wsdl:message>
+	<wsdl:portType name="RemoteControl">
+		<wsdl:operation name="GetReceivedDeliveries" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveriesRequest" message="rc:GetReceivedDeliveriesRequest"/>
+			<wsdl:output name="GetReceivedDeliveriesResponse" message="rc:GetReceivedDeliveriesResponse"/>
+			<wsdl:fault name="GetReceivedDeliveriesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveriesFrom" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveriesFromRequest" message="rc:GetReceivedDeliveriesFromRequest"/>
+			<wsdl:output name="GetReceivedDeliveriesFromResponse" message="rc:GetReceivedDeliveriesFromResponse"/>
+			<wsdl:fault name="GetReceivedDeliveriesFromFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryDetails" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveryDetailsRequest" message="rc:GetReceivedDeliveryDetailsRequest"/>
+			<wsdl:output name="GetReceivedDeliveryDetailsResponse" message="rc:GetReceivedDeliveryDetailsResponse"/>
+			<wsdl:fault name="GetReceivedDeliveryDetailsFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryAttachments" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveryAttachmentsRequest" message="rc:GetReceivedDeliveryAttachmentsRequest"/>
+			<wsdl:output name="GetReceivedDeliveryAttachmentsResponse" message="rc:GetReceivedDeliveryAttachmentsResponse"/>
+			<wsdl:fault name="GetReceivedDeliveryAttachmentsFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryAttachment" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveryAttachmentRequest" message="rc:GetReceivedDeliveryAttachmentRequest"/>
+			<wsdl:output name="GetReceivedDeliveryAttachmentResponse" message="rc:GetReceivedDeliveryAttachmentResponse"/>
+			<wsdl:fault name="GetReceivedDeliveryAttachmentFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="MoveReceivedDeliveryToTrash">
+			<wsdl:input name="MoveReceivedDeliveryToTrashRequest" message="rc:MoveReceivedDeliveryToTrashRequest"/>
+			<wsdl:output name="MoveReceivedDeliveryToTrashResponse" message="rc:MoveReceivedDeliveryToTrashResponse"/>
+			<wsdl:fault name="MoveReceivedDeliveryToTrashFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveriesInTrash" parameterOrder="WSRequest">
+			<wsdl:input name="GetReceivedDeliveriesInTrashRequest" message="rc:GetReceivedDeliveriesInTrashRequest"/>
+			<wsdl:output name="GetReceivedDeliveriesInTrashResponse" message="rc:GetReceivedDeliveriesInTrashResponse"/>
+			<wsdl:fault name="GetReceivedDeliveriesInTrashFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="RestoreReceivedDeliveryFromTrash">
+			<wsdl:input name="RestoreReceivedDeliveryFromTrashRequest" message="rc:RestoreReceivedDeliveryFromTrashRequest"/>
+			<wsdl:output name="RestoreReceivedDeliveryFromTrashResponse" message="rc:RestoreReceivedDeliveryFromTrashResponse"/>
+			<wsdl:fault name="RestoreReceivedDeliveryFromTrashFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteReceivedDeliveryFromTrash">
+			<wsdl:input name="DeleteReceivedDeliveryFromTrashRequest" message="rc:DeleteReceivedDeliveryFromTrashRequest"/>
+			<wsdl:output name="DeleteReceivedDeliveryFromTrashResponse" message="rc:DeleteReceivedDeliveryFromTrashResponse"/>
+			<wsdl:fault name="DeleteReceivedDeliveryFromTrashFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAddressBook" parameterOrder="WSRequest">
+			<wsdl:input name="GetAddressBookRequest" message="rc:GetAddressBookRequest"/>
+			<wsdl:output name="GetAddressBookResponse" message="rc:GetAddressBookResponse"/>
+			<wsdl:fault name="GetAddressBookFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SendDelivery" parameterOrder="WSRequest">
+			<wsdl:input name="SendDeliveryRequest" message="rc:SendDeliveryRequest"/>
+			<wsdl:output name="SendDeliveryResponse" message="rc:SendDeliveryResponse"/>
+			<wsdl:fault name="SendDeliveryFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveries" parameterOrder="WSRequest">
+			<wsdl:input name="GetSentDeliveriesRequest" message="rc:GetSentDeliveriesRequest"/>
+			<wsdl:output name="GetSentDeliveriesResponse" message="rc:GetSentDeliveriesResponse"/>
+			<wsdl:fault name="GetSentDeliveriesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveriesFrom" parameterOrder="WSRequest">
+			<wsdl:input name="GetSentDeliveriesFromRequest" message="rc:GetSentDeliveriesFromRequest"/>
+			<wsdl:output name="GetSentDeliveriesFromResponse" message="rc:GetSentDeliveriesFromResponse"/>
+			<wsdl:fault name="GetSentDeliveriesFromFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveryAttachments" parameterOrder="WSRequest">
+			<wsdl:input name="GetSentDeliveryAttachmentsRequest" message="rc:GetSentDeliveryAttachmentsRequest"/>
+			<wsdl:output name="GetSentDeliveryAttachmentsResponse" message="rc:GetSentDeliveryAttachmentsResponse"/>
+			<wsdl:fault name="GetSentDeliveryAttachmentsFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSentDelivery">
+			<wsdl:input name="DeleteSentDeliveryRequest" message="rc:DeleteSentDeliveryRequest"/>
+			<wsdl:output name="DeleteSentDeliveryResponse" message="rc:DeleteSentDeliveryResponse"/>
+			<wsdl:fault name="DeleteSentDeliveryFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAbsence" parameterOrder="WSRequest">
+			<wsdl:input name="GetAbsenceRequest" message="rc:GetAbsenceRequest"/>
+			<wsdl:output name="GetAbsenceResponse" message="rc:GetAbsenceResponse"/>
+			<wsdl:fault name="GetAbsenceFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAbsence">
+			<wsdl:input name="SetAbsenceRequest" message="rc:SetAbsenceRequest"/>
+			<wsdl:output name="SetAbsenceResponse" message="rc:SetAbsenceResponse"/>
+			<wsdl:fault name="SetAbsenceFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveAbsence">
+			<wsdl:input name="RemoveAbsenceRequest" message="rc:RemoveAbsenceRequest"/>
+			<wsdl:output name="RemoveAbsenceResponse" message="rc:RemoveAbsenceResponse"/>
+			<wsdl:fault name="RemoveAbsenceFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDocumentFormats" parameterOrder="WSRequest">
+			<wsdl:input name="GetAcceptedDocumentFormatsRequest" message="rc:GetAcceptedDocumentFormatsRequest"/>
+			<wsdl:output name="GetAcceptedDocumentFormatsResponse" message="rc:GetAcceptedDocumentFormatsResponse"/>
+			<wsdl:fault name="GetAcceptedDocumentFormatsFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDocumentFormats">
+			<wsdl:input name="SetAcceptedDocumentFormatsRequest" message="rc:SetAcceptedDocumentFormatsRequest"/>
+			<wsdl:output name="SetAcceptedDocumentFormatsResponse" message="rc:SetAcceptedDocumentFormatsResponse"/>
+			<wsdl:fault name="SetAcceptedDocumentFormatsFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDocumentClasses" parameterOrder="WSRequest">
+			<wsdl:input name="GetAcceptedDocumentClassesRequest" message="rc:GetAcceptedDocumentClassesRequest"/>
+			<wsdl:output name="GetAcceptedDocumentClassesResponse" message="rc:GetAcceptedDocumentClassesResponse"/>
+			<wsdl:fault name="GetAcceptedDocumentClassesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDocumentClasses">
+			<wsdl:input name="SetAcceptedDocumentClassesRequest" message="rc:SetAcceptedDocumentClassesRequest"/>
+			<wsdl:output name="SetAcceptedDocumentClassesResponse" message="rc:SetAcceptedDocumentClassesResponse"/>
+			<wsdl:fault name="SetAcceptedDocumentClassesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDeliveryQualities" parameterOrder="WSRequest">
+			<wsdl:input name="GetAcceptedDeliveryQualitiesRequest" message="rc:GetAcceptedDeliveryQualitiesRequest"/>
+			<wsdl:output name="GetAcceptedDeliveryQualitiesResponse" message="rc:GetAcceptedDeliveryQualitiesResponse"/>
+			<wsdl:fault name="GetAcceptedDeliveryQualitiesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDeliveryQualities">
+			<wsdl:input name="SetAcceptedDeliveryQualitiesRequest" message="rc:SetAcceptedDeliveryQualitiesRequest"/>
+			<wsdl:output name="SetAcceptedDeliveryQualitiesResponse" message="rc:SetAcceptedDeliveryQualitiesResponse"/>
+			<wsdl:fault name="SetAcceptedDeliveryQualitiesFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteAddressBookEntry">
+			<wsdl:input name="DeleteAddressBookEntryRequest" message="rc:DeleteAddressBookEntryRequest"/>
+			<wsdl:output name="DeleteAddressBookEntryResponse" message="rc:DeleteAddressBookEntryResponse"/>
+			<wsdl:fault name="DeleteAddressBookEntryFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SearchAddress" parameterOrder="WSRequest">
+			<wsdl:input name="SearchAddressRequest" message="rc:SearchAddressRequest"/>
+			<wsdl:output name="SearchAddressResponse" message="rc:SearchAddressResponse"/>
+			<wsdl:fault name="SearchAddressFault" message="rc:RemoteControlFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="RemoteControlSoapBinding" type="rc:RemoteControl">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetReceivedDeliveries">
+			<soap:operation soapAction="GetReceivedDeliveries"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveriesFault">
+				<soap:fault name="GetReceivedDeliveriesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveriesFrom">
+			<soap:operation soapAction="GetReceivedDeliveriesFrom"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveriesFromFault">
+				<soap:fault name="GetReceivedDeliveriesFromFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryDetails">
+			<soap:operation soapAction="GetReceivedDeliveryDetails"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveryDetailsFault">
+				<soap:fault name="GetReceivedDeliveryDetailsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryAttachments">
+			<soap:operation soapAction="GetReceivedDeliveryAttachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveryAttachmentsFault">
+				<soap:fault name="GetReceivedDeliveryAttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveryAttachment">
+			<soap:operation soapAction="GetReceivedDeliveryAttachment"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveryAttachmentFault">
+				<soap:fault name="GetReceivedDeliveryAttachmentFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="MoveReceivedDeliveryToTrash">
+			<soap:operation soapAction="MoveReceivedDeliveryToTrash"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MoveReceivedDeliveryToTrashFault">
+				<soap:fault name="MoveReceivedDeliveryToTrashFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetReceivedDeliveriesInTrash">
+			<soap:operation soapAction="GetReceivedDeliveriesInTrash"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetReceivedDeliveriesInTrashFault">
+				<soap:fault name="GetReceivedDeliveriesInTrashFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RestoreReceivedDeliveryFromTrash">
+			<soap:operation soapAction="RestoreReceivedDeliveryFromTrash"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="RestoreReceivedDeliveryFromTrashFault">
+				<soap:fault name="RestoreReceivedDeliveryFromTrashFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteReceivedDeliveryFromTrash">
+			<soap:operation soapAction="DeleteReceivedDeliveryFromTrash"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeleteReceivedDeliveryFromTrashFault">
+				<soap:fault name="DeleteReceivedDeliveryFromTrashFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAddressBook">
+			<soap:operation soapAction="GetAddressBook"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAddressBookFault">
+				<soap:fault name="GetAddressBookFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SendDelivery">
+			<soap:operation soapAction="SendDelivery"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SendDeliveryFault">
+				<soap:fault name="SendDeliveryFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveries">
+			<soap:operation soapAction="GetSentDeliveries"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetSentDeliveriesFault">
+				<soap:fault name="GetSentDeliveriesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveriesFrom">
+			<soap:operation soapAction="GetSentDeliveriesFrom"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetSentDeliveriesFromFault">
+				<soap:fault name="GetSentDeliveriesFromFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSentDeliveryAttachments">
+			<soap:operation soapAction="GetSentDeliveryAttachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetSentDeliveryAttachmentsFault">
+				<soap:fault name="GetSentDeliveryAttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSentDelivery">
+			<soap:operation soapAction="DeleteSentDelivery"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeleteSentDeliveryFault">
+				<soap:fault name="DeleteSentDeliveryFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAbsence">
+			<soap:operation soapAction="GetAbsence"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAbsenceFault">
+				<soap:fault name="GetAbsenceFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAbsence">
+			<soap:operation soapAction="SetAbsence"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SetAbsenceFault">
+				<soap:fault name="SetAbsenceFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveAbsence">
+			<soap:operation soapAction="RemoveAbsence"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="RemoveAbsenceFault">
+				<soap:fault name="RemoveAbsenceFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDocumentFormats">
+			<soap:operation soapAction="GetAcceptedDocumentFormats"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAcceptedDocumentFormatsFault">
+				<soap:fault name="GetAcceptedDocumentFormatsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDocumentFormats">
+			<soap:operation soapAction="SetAcceptedDocumentFormats"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SetAcceptedDocumentFormatsFault">
+				<soap:fault name="SetAcceptedDocumentFormatsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDocumentClasses">
+			<soap:operation soapAction="GetAcceptedDocumentClasses"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAcceptedDocumentClassesFault">
+				<soap:fault name="GetAcceptedDocumentClassesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDocumentClasses">
+			<soap:operation soapAction="SetAcceptedDocumentClasses"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SetAcceptedDocumentClassesFault">
+				<soap:fault name="SetAcceptedDocumentClassesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAcceptedDeliveryQualities">
+			<soap:operation soapAction="GetAcceptedDeliveryQualities"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAcceptedDeliveryQualitiesFault">
+				<soap:fault name="GetAcceptedDeliveryQualitiesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAcceptedDeliveryQualities">
+			<soap:operation soapAction="SetAcceptedDeliveryQualities"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SetAcceptedDeliveryQualitiesFault">
+				<soap:fault name="SetAcceptedDeliveryQualitiesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteAddressBookEntry">
+			<soap:operation soapAction="DeleteAddressBookEntry"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeleteAddressBookEntryFault">
+				<soap:fault name="DeleteAddressBookEntryFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SearchAddress">
+			<soap:operation soapAction="SearchAddress"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SearchAddressFault">
+				<soap:fault name="SearchAddressFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RemoteControlService">
+		<wsdl:port name="RemoteControl" binding="rc:RemoteControlSoapBinding">
+			<soap:address location="https://www.e-zustellung.at/ZustellserviceWko/services/remote-control"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
