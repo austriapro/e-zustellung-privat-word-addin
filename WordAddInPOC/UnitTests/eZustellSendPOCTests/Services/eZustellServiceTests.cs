@@ -31,7 +31,7 @@ namespace eZustellSendPOC.Services.Tests
         {
             certServ = uc.Resolve<ICertificateService>();
             string fnCert = @"C:\GIT\eZustellung\TestDaten\TestDatenSammlung\TestDatenSammlung\Daten\eZustellPOC\jb_labs1.pfx";
-            var rc = certServ.Load(fnCert, "ycadqe13");
+            var rc = certServ.Load(fnCert, "password");
             return rc;
         }
 
