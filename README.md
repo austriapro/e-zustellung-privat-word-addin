@@ -1,4 +1,4 @@
-# e-Zustellung AddIn für Microsoft Word 2012 und 2013
+# e-Zustellung AddIn für Microsoft Word 2010 und 2013
 
 Das e-Zustellung AddIn für Microsoft Word 2012 und 2013 ist eine Proof-Of-Concept 
 Implementierung die den Versand von Schriftstücken über die Remote Control Schnittstelle 
